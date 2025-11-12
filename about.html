@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn the story behind Café Maple - Ratlam's finest artisanal coffee shop">
+    <title>About Us - Café Maple</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-brown: #8B4513;
+            --secondary-brown: #A0522D;
+            --cream: #FFF8DC;
+            --light-cream: #FDF5E6;
+            --gold: #DAA520;
+            --text-dark: #3E2723;
+            --text-light: #6D4C41;
+            --white: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--cream);
+            overflow-x: hidden;
+        }
+
+        header {
+            background: rgba(255, 248, 220, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary-brown);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--gold);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-brown);
+        }
+
+        main {
+            margin-top: 80px;
+            padding: 0;
+        }
+
+        .page-header {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+                        url('https://images.pexels.com/photos/1695052/pexels-photo-1695052.jpeg');
+            background-size: cover;
+            background-position: center;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .section {
+            padding: 4rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--primary-brown);
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: var(--gold);
+            margin: 0.5rem auto;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            margin-bottom: 4rem;
+        }
+
+        .about-text h3 {
+            color: var(--secondary-brown);
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .about-text p {
+            margin-bottom: 1rem;
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        .about-image {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .team-section {
+            background: var(--light-cream);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .team-member {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .team-member:hover {
+            transform: translateY(-5px);
+        }
+
+        .team-member img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            border: 3px solid var(--gold);
+        }
+
+        .team-member h4 {
+            color: var(--primary-brown);
+            margin-bottom: 0.5rem;
+        }
+
+        .team-member p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .values-section ul {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .values-section li {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--gold);
+        }
+
+        .values-section h4 {
+            color: var(--secondary-brown);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        footer {
+            background: var(--primary-brown);
+            color: var(--cream);
+            padding: 3rem 5%;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--gold);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icons a {
+            color: var(--cream);
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: var(--gold);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: var(--cream);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,248,220,0.3);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--cream);
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="index.html" class="logo">☕ Café Maple</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">☰</button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Page Header -->
+        <section class="page-header">
+            <h1>Our Story</h1>
+        </section>
+
+        <!-- About Content -->
+        <section class="section">
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Born from Passion, Brewed with Love</h3>
+                    <p>Café Maple opened its doors in 2023 with a simple dream: to bring the finest artisanal coffee experience to Ratlam. Founded by coffee enthusiasts who traveled the world exploring coffee cultures, we returned home with a mission to create something special.</p>
+                    <p>Located in the heart of the city at Plaza Commercial Complex, we're more than just a café – we're a community hub where conversations flow as smoothly as our espresso. Our name "Maple" symbolizes the sweetness of connection and the warmth of togetherness.</p>
+                    <p>Every bean is carefully selected from sustainable farms, roasted to perfection, and brewed by our trained baristas. We believe in the artistry of coffee-making and the joy of sharing exceptional moments over a perfect cup.</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.pexels.com/photos/683039/pexels-photo-683039.jpeg" alt="Café Maple Interior">
+                </div>
+            </div>
+        </section>
+
+        <!-- Values Section -->
+        <section class="section values-section">
+            <h2 class="section-title">Our Values</h2>
+            <ul>
+                <li>
+                    <h4>☕ Quality First</h4>
+                    <p>Only premium, ethically-sourced beans and fresh, local ingredients make it to your table.</p>
+                </li>
+                <li>
+                    <h4>🤝 Community Focus</h4>
+                    <p>We're proud to be part of Ratlam's vibrant community, supporting local artists and events.</p>
+                </li>
+                <li>
+                    <h4>🌱 Sustainability</h4>
+                    <p>Eco-friendly practices from bean to cup – because we care about our planet.</p>
+                </li>
+                <li>
+                    <h4>💡 Innovation</h4>
+                    <p>Constantly exploring new flavors, brewing methods, and experiences for our guests.</p>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Team Section -->
+        <section class="section team-section">
+            <h2 class="section-title">Meet Our Team</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg" alt="Founder">
+                    <h4>Ankit Verma</h4>
+                    <p>Founder & Chief Barista</p>
+                    <p>Coffee connoisseur with 10+ years of experience in specialty coffee.</p>
+                </div>
+                <div class="team-member">
+                    <img src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg" alt="Pastry Chef">
+                    <h4>Pooja Singh</h4>
+                    <p>Head Pastry Chef</p>
+                    <p>Creates magical pastries that perfectly complement our coffee.</p>
+                </div>
+                <div class="team-member">
+                    <img src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg" alt="Manager">
+                    <h4>Rahul Sharma</h4>
+                    <p>Operations Manager</p>
+                    <p>Ensures every guest experience is warm, welcoming, and memorable.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Café Maple</h3>
+                <p>Premium artisanal coffee & bakery in Ratlam</p>
+                <div class="social-icons">
+                    <a href="#" aria-label="Instagram">📷</a>
+                    <a href="#" aria-label="Facebook">📘</a>
+                    <a href="#" aria-label="YouTube">▶️</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="menu.html">Menu</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Opening Hours</h3>
+                <p>Mon - Fri: 8:00 AM - 10:00 PM</p>
+                <p>Saturday: 8:00 AM - 11:00 PM</p>
+                <p>Sunday: 9:00 AM - 9:00 PM</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Café Maple. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore Café Maple's menu - artisanal coffees, teas, fresh bakery, and delicious snacks">
+    <title>Menu - Café Maple</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-brown: #8B4513;
+            --secondary-brown: #A0522D;
+            --cream: #FFF8DC;
+            --light-cream: #FDF5E6;
+            --gold: #DAA520;
+            --text-dark: #3E2723;
+            --text-light: #6D4C41;
+            --white: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--cream);
+            overflow-x: hidden;
+        }
+
+        header {
+            background: rgba(255, 248, 220, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary-brown);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--gold);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-brown);
+        }
+
+        main {
+            margin-top: 80px;
+        }
+
+        .page-header {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+                        url('https://images.pexels.com/photos/1416855/pexels-photo-1416855.jpeg');
+            background-size: cover;
+            background-position: center;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .menu-section {
+            padding: 4rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .menu-category {
+            margin-bottom: 4rem;
+        }
+
+        .category-title {
+            font-size: 2rem;
+            color: var(--primary-brown);
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .category-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--gold);
+            margin: 0.5rem auto;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .menu-item {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 10px;
+            transition: transform 0.3s;
+            border-left: 4px solid var(--gold);
+        }
+
+        .menu-item:hover {
+            transform: translateX(5px);
+        }
+
+        .menu-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .menu-item h4 {
+            color: var(--primary-brown);
+            font-size: 1.2rem;
+        }
+
+        .price {
+            color: var(--gold);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .menu-item p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .menu-item-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .special-badge {
+            background: var(--gold);
+            color: var(--text-dark);
+            padding: 0.2rem 0.5rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-left: 0.5rem;
+        }
+
+        footer {
+            background: var(--primary-brown);
+            color: var(--cream);
+            padding: 3rem 5%;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--gold);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icons a {
+            color: var(--cream);
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: var(--gold);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: var(--cream);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,248,220,0.3);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--cream);
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="index.html" class="logo">☕ Café Maple</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">☰</button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Page Header -->
+        <section class="page-header">
+            <h1>Our Menu</h1>
+        </section>
+
+        <!-- Menu Section -->
+        <section class="menu-section">
+            <!-- Coffees -->
+            <div class="menu-category">
+                <h2 class="category-title">☕ Signature Coffees</h2>
+                <div class="menu-grid">
+                    <div class="menu-item">
+                        <img src="https://images.pexels.com/photos/302898/pexels-photo-302898.jpeg" alt="Espresso" class="menu-item-image">
+                        <div class="menu-item-header">
+                            <h4>Espresso<span class="special-badge">SIGNATURE</span></h4>
+                            <span class="price">₹120</span>
+                        </div>
+                        <p>Rich, bold, and perfectly balanced. Double shot of premium Arabica beans.</p>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.pexels.com/photos/302899/pexels-photo-302899.jpeg" alt="Maple Latte" class="menu-item-image">
+                        <div class="menu-item-header">
+                            <h4>Maple Latte<span class="special-badge">HOUSE SPECIAL</span></h4>
+                            <span class="price">₹180</span>
+                        </div>
+                        <p>Our signature drink with real maple syrup, steamed milk, and double espresso shot.</p>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.pexels.com/photos/302904/pexels-photo-302904.jpeg" alt="Cappuccino" class="menu-item-image">
+                        <div class="menu-item-header">
+                            <h4>Cappuccino</h4>
+                            <span class="price">₹150</span>
+                        </div>
+                        <p>Classic Italian-style with perfectly foamed milk and cinnamon dusting.</p>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.pexels.com/photos/904616/pexels-photo-904616.jpeg" alt="Cold Brew" class="menu-item-image">
+                        <div class="menu-item-header">
+                            <h4>Cold Brew</h4>
+                            <span class="price">₹160</span>
+                        </div>
+                        <p>24-hour steeped cold brew, smooth and naturally sweet. Served over ice.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Teas -->
+            <div class="menu-category">
+                <h2 class="category-title">🍵 Teas</h2>
+                <div class="menu-grid">
+                    <div class="menu-item">
+                        <h4>Assam Chai<span class="special-badge">FRESH</span></h4>
+                        <span class="price">₹80</span>
+                        <p>Traditional Indian chai with aromatic spices and fresh ginger.</p>
+                    </div>
+                    <div class="menu-item">
+                        <h4>Green Tea</h4>
+                        <span class="price">₹100</span>
+                        <p>Organic Japanese sencha. Light, refreshing, and packed with antioxidants.</p>
+                    </div>
+                    <div class="menu-item">
+                        <h4>Earl Grey</h4>
+                        <span class="price">₹120</span>
+                        <p>Classic black tea infused with bergamot oil. Served with honey and lemon.</p>
+                    </div>
+                    <div class="menu-item">
+                        <h4>Herbal Blend</h4>
+                        <span class="price">₹110</span>
+                        <p>Chamomile, mint, and lemongrass blend. Caffeine-free and soothing.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bakery -->
+            <div class="menu-category">
+                <h2 class="category-title">🥐 Fresh Bakery</h2>
+                <div class="menu-grid">
+                    <div class="menu-item">
+                        <img src="https://images.pexels.com/photos/1775043/pexels-photo-1775043.jpeg" alt="Croissant" class="menu-item-image">
+                        <div class="menu-item-header">
+                            <h4>Butter Croissant</h4>
+                            <span class="price">₹90</span>
+                        </div>
+                        <p>Flaky, buttery perfection. Freshly baked every morning.</p>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.pexels.com/photos/140831/pexels-photo-140831.jpeg" alt="Blueberry Muffin" class="menu-item-image">
+                        <div class="menu-item-header">
+                            <h4>Blueberry Muffin<span class="special-badge">FRESH</span></h4>
+                            <span class="price">₹110</span>
+                        </div>
+                        <p>Soft, moist muffins bursting with fresh blueberries.</p>
+                    </div>
+                    <div class="menu-item">
+                        <h4>Chocolate Brownie</h4>
+                        <span class="price">₹130</span>
+                        <p>Rich, fudgy brownie with Belgian chocolate chips. Warm and gooey!</p>
+                    </div>
+                    <div class="menu-item">
+                        <h4>Multigrain Bread</h4>
+                        <span class="price">₹60</span>
+                        <p>Healthy, hearty, and toasted to perfection. Served with butter.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Breakfast & Snacks -->
+            <div class="menu-category">
+                <h2 class="category-title">🍳 Breakfast & Snacks</h2>
+                <div class="menu-grid">
+                    <div class="menu-item">
+                        <img src="https://images.pexels.com/photos/1893555/pexels-photo-1893555.jpeg" alt="Sandwich" class="menu-item-image">
+                        <div class="menu-item-header">
+                            <h4>Grilled Sandwich</h4>
+                            <span class="price">₹150</span>
+                        </div>
+                        <p>Triple-layer sandwich with cheese, veggies, and our secret sauce.</p>
+                    </div>
+                    <div class="menu-item">
+                        <h4>Poha</h4>
+                        <span class="price">₹80</span>
+                        <p>Traditional Ratlam-style poha with peanuts and fresh coriander.</p>
+                    </div>
+                    <div class="menu-item">
+                        <h4>French Fries</h4>
+                        <span class="price">₹100</span>
+                        <p>Crispy golden fries with our special maple seasoning.</p>
+                    </div>
+                    <div class="menu-item">
+                        <h4>Pancakes</h4>
+                        <span class="price">₹180</span>
+                        <p>Fluffy pancakes served with maple syrup and fresh fruits.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Café Maple</h3>
+                <p>Premium artisanal coffee & bakery in Ratlam</p>
+                <div class="social-icons">
+                    <a href="#" aria-label="Instagram">📷</a>
+                    <a href="#" aria-label="Facebook">📘</a>
+                    <a href="#" aria-label="YouTube">▶️</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="menu.html">Menu</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Opening Hours</h3>
+                <p>Mon - Fri: 8:00 AM - 10:00 PM</p>
+                <p>Saturday: 8:00 AM - 11:00 PM</p>
+                <p>Sunday: 9:00 AM - 9:00 PM</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Café Maple. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>
